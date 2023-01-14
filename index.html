@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="./opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+    <title>Rass</title>
+</head>
+<body>
+<video id="video" autoplay playsinline></video>
+<canvas id="canvas"></canvas>
+<script type="text/javascript">
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = 640;
+    canvas.height = 480;
+    function onOpenCvReady() {
+        // Kamera kaynağını aç
+        var cap = new cv.VideoCapture(0);
+        // Frame'i al
+        function processVideo() {
+            // let begin = Date.now();
+            cap.read(mat);
+            ctx.drawImage(video, 0, 0, 640, 480);
+            // let imageData = ctx.getImageData(0, 0, 640, 480);
+            cv.imshow('canvas', mat);
+            // process video here
+            setTimeout(processVideo, 1000/30);
+        }
+        setTimeout(processVideo, 0);
+    }
+</script>
+</body>
+</html>
